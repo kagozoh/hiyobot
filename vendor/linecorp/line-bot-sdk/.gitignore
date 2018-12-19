@@ -2,6 +2,5 @@
 composer.lock
 composer.phar
 /tests/Private
-/docs/
 *.iml
 vendor/
