@@ -1,33 +1,50 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+/**
+ * Copyright 2016 LINE Corporation
+ *
+ * LINE Corporation licenses this file to you under the Apache License,
+ * version 2.0 (the "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at:
+ *
+ *   https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
 
-$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LINE_CHANNEL_ACCESS_TOKEN'));
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LINE_CHANNEL_SECRET')]);
+require_once('./LINEBotTiny.php');
 
-$signature = $_SERVER["HTTP_" . \LINE\LINEBot\Constant\HTTPHeader::LINE_SIGNATURE];
-try {
-  $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
-} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
-  error_log("parseEventRequest failed. InvalidSignatureException => ".var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
-  error_log("parseEventRequest failed. UnknownEventTypeException => ".var_export($e, true));
-} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
-  error_log("parseEventRequest failed. UnknownMessageTypeException => ".var_export($e, true));
-} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
-  error_log("parseEventRequest failed. InvalidEventRequestException => ".var_export($e, true));
-}
+$channelAccessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
+$channelSecret = getenv('LINE_CHANNEL_SECRET');
 
-foreach ($events as $event) {
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent)) {
-    error_log('Non message event has come');
-    continue;
-  }
-  if (!($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
-    error_log('Non text message has come');
-    continue;
-  }
-  $bot->replyText($event->getReplyToken(), $event->getText());
-}
-
- ?>
+$client = new LINEBotTiny($channelAccessToken, $channelSecret);
+foreach ($client->parseEvents() as $event) {
+    switch ($event['type']) {
+        case 'message':
+            $message = $event['message'];
+            switch ($message['type']) {
+                case 'text':
+                    $client->replyMessage([
+                        'replyToken' => $event['replyToken'],
+                        'messages' => [
+                            [
+                                'type' => 'text',
+                                'text' => $message['text']
+                            ]
+                        ]
+                    ]);
+                    break;
+                default:
+                    error_log('Unsupported message type: ' . $message['type']);
+                    break;
+            }
+            break;
+        default:
+            error_log('Unsupported event type: ' . $event['type']);
+            break;
+    }
+};
