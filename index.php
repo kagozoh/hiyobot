@@ -38,18 +38,6 @@ foreach ($client->parseEvents() as $event) {
                         ]
                     ]);
                     break;
-                case 'sticker':
-                    $client->replyMessage([
-                        'replyToken' => $event['replyToken'],
-                        'messages' => [
-                            [
-                                'type' => 'sticker',
-                                'packageId' => {STKPKGID},
-                                'stickerId' => {STKID}
-                            ]
-                        ]
-                    ]);
-                    break;
                 default:
                     error_log('Unsupported message type: ' . $message['type']);
                     break;
