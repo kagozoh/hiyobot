@@ -28,19 +28,19 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
+                    switch ($message['text']) {
+                        case '🐶':
+                            'text' => $message['🐱']
+                            break;
+　                       case '🐱':
+                            'text' => $message['🐶']
+                            break;
+                        default:
+                            'text' => $message['text']
+                            break;
+                    }
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
-                            switch ($message['text']) {
-                                case '🐶':
-                                    'text' => $message['🐱']
-                                    break;
-　                              case '🐱':
-                                    'text' => $message['🐶']
-                                    break;
-                                default:
-                                    'text' => $message['text']
-                                    break;
-                            }
                             'messages' => [
                             [
                                 'type' => 'text',
