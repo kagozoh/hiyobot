@@ -38,6 +38,28 @@ foreach ($client->parseEvents() as $event) {
                         ]
                     ]);
                     break;
+                case '🐶':
+                    $client->replyMessage([
+                        'replyToken' => $event['replyToken'],
+                        'messages' => [
+                            [
+                                'type' => 'text',
+                                'text' => $message['🐱']
+                            ]
+                        ]
+                    ]);
+                    break;
+                case '🐱':
+                    $client->replyMessage([
+                        'replyToken' => $event['replyToken'],
+                        'messages' => [
+                            [
+                                'type' => 'text',
+                                'text' => $message['🐶']
+                            ]
+                        ]
+                    ]);
+                    break;
                 case 'sticker':
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
