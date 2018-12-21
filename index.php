@@ -27,24 +27,24 @@ foreach ($client->parseEvents() as $event) {
         case 'message':
             $message = $event['message'];
             switch ($message['type']) {
-                case 'U+1F436':
+                case '\uF436':
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
                             [
                                 'type' => 'text',
-                                'text' => $message['U+1F431']
+                                'text' => $message['\uF431']
                             ]
                         ]
                     ]);
                     break;
-                case 'U+1F431':
+                case '\u1F431':
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
                         'messages' => [
                             [
                                 'type' => 'text',
-                                'text' => $message['U+1F436']
+                                'text' => $message['\uF436']
                             ]
                         ]
                     ]);
