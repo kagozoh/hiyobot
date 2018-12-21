@@ -36,6 +36,7 @@ foreach ($client->parseEvents() as $event) {
                             $message['text'] = '🐶';
                             break;
                         default:
+                            $message['text'] = $message['text'];
                             break;
                     }
                     $client->replyMessage([
