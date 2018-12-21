@@ -27,28 +27,6 @@ foreach ($client->parseEvents() as $event) {
         case 'message':
             $message = $event['message'];
             switch ($message['type']) {
-                case mb_convert_encoding( hex2bin( "0001F436"), 'UTF-8', 'UTF-32'):
-                    $client->replyMessage([
-                        'replyToken' => $event['replyToken'],
-                        'messages' => [
-                            [
-                                'type' => 'text',
-                                'text' => $message[mb_convert_encoding( hex2bin( "0001F431"), 'UTF-8', 'UTF-32')]
-                            ]
-                        ]
-                    ]);
-                    break;
-                case mb_convert_encoding( hex2bin( "0001F431"), 'UTF-8', 'UTF-32'):
-                    $client->replyMessage([
-                                          'replyToken' => $event['replyToken'],
-                                          'messages' => [
-                                          [
-                                          'type' => 'text',
-                                          'text' => $message[mb_convert_encoding( hex2bin( "0001F436"), 'UTF-8', 'UTF-32')]
-                                          ]
-                                          ]
-                                          ]);
-                    break;
                 case 'text':
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
