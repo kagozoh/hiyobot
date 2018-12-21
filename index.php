@@ -30,13 +30,12 @@ foreach ($client->parseEvents() as $event) {
                 case 'text':
                     switch ($message['text']) {
                         case '🐶':
-                            'text' => $message['🐱'];
+                            'text' => '🐱';
                             break;
 　                       case '🐱':
-                            'text' => $message['🐶'];
+                            'text' => '🐶';
                             break;
                         default:
-                            'text' => $message['text'];
                             break;
                     }
                     $client->replyMessage([
