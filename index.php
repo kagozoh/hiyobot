@@ -22,13 +22,13 @@ $channelAccessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
 $channelSecret = getenv('LINE_CHANNEL_SECRET');
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
-foreach ($client->parseEvents() as $event) {
-    switch ($event['type']) {
+foreach ($client->parseEvents() as $event){
+    switch ($event['type']){
         case 'message':
             $message = $event['message'];
-            switch ($message['type']) {
+            switch s($message['type']) {
                 case 'text':
-                    switch ($message['text']) {
+                    switch ($message['text']){
                         case '🐶':
                             $message['text'] = '🐱';
                             break;
