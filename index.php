@@ -34,7 +34,6 @@ foreach ($client->parseEvents() as $event){
                             [
                                 'type' => 'text',
                                 'text' => $message['text']
-                                }
                             ]
                         ]
                     ]);
