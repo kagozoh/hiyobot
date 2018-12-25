@@ -28,16 +28,10 @@ foreach ($client->parseEvents() as $event){
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    switch ($message['text']){
-                        case '🐶':
-                             $message['text'] = '🐱✨';
-                             break;
-                        case '🐱':
-                             $message['text'] = '🐶✨';
-                             break;
-                         default:
-                             $message['text'] = $message['text'];
-                             break;
+                    if (preg_match('/🐶/', $message['text'])){
+                        $message['text'] = preg_filter('/\A[🐶]++\z/', '🐱', $message['text']);
+                    }else if (preg_match('/🐱/', $message['text'])){
+                        $message['text'] = preg_filter('/\A[🐱]++\z/', '🐶', $message['text']);
                     }
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
