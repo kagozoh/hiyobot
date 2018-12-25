@@ -28,11 +28,9 @@ foreach ($client->parseEvents() as $event){
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                    $var_grep = preg_filter('/\A[🐶]++\z/', '🐱✨', $message['text']);
-                    $var_grep = preg_filter('/\A[🐱]++\z/', '🐶✨', $message['text']);
                     switch ($message['text']){
                         case '🐶':
-                             $message['text'] = $var_grep;
+                             $message['text'] = '🐱✨';
                              break;
                         case '🐱':
                              $message['text'] = '🐶✨';
