@@ -29,9 +29,9 @@ foreach ($client->parseEvents() as $event){
             switch ($message['type']) {
                 case 'text':
                     if (preg_match('/🐶/', $message['text'])){
-                        $message['text'] = preg_filter('/\A[🐶]++\z/', '🐱', $message['text']);
+                        $message['text'] = str_replace('🐶', '🐱', $message['text']);
                     }else if (preg_match('/🐱/', $message['text'])){
-                        $message['text'] = preg_filter('/\A[🐱]++\z/', '🐶', $message['text']);
+                        $message['text'] = str_replace('🐱', '🐶', $message['text']);
                     }
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
