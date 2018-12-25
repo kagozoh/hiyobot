@@ -37,9 +37,9 @@ foreach ($client->parseEvents() as $event){
                         $replace = array('🐶🐱');
                         $message['text'] = str_replace($search, $replace, $message['text']);
                     }elseif (preg_match('/🐶/', $message['text'])){
-                        $message['text'] = str_replace('🐶', '🐱', $message['text']);
+                        $message['text'] = str_replace('🐶', '🐱✨', $message['text']);
                     }elseif (preg_match('/🐱/', $message['text'])){
-                        $message['text'] = str_replace('🐱', '🐶', $message['text']);
+                        $message['text'] = str_replace('🐱', '🐶✨', $message['text']);
                     }
 
                     switch ($message['text']){
