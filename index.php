@@ -30,17 +30,17 @@ foreach ($client->parseEvents() as $event){
                 case 'text':
                     if (preg_match('/🐶/', $message['text'])){
                         $message['text'] = str_replace('🐶', '🐱', $message['text']);
-                    }else if (preg_match('/🐱/', $message['text'])){
+                    }
+                    if (preg_match('/🐱/', $message['text'])){
                         $message['text'] = str_replace('🐱', '🐶', $message['text']);
-                    }else{
-                        switch ($message['text']){
-                            case '🐰':
-                                 $message['text'] = 'うさ。。';
-                                 break;
-                            default:
-                                 $message['text'] = $message['text'];
-                                 break;
-                         }
+                    }
+                    switch ($message['text']){
+                        case '🐰':
+                              $message['text'] = 'うさ。。';
+                              break;
+                        default:
+                              $message['text'] = $message['text'];
+                              break;
                     }
                     $client->replyMessage([
                         'replyToken' => $event['replyToken'],
