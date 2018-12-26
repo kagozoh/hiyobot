@@ -46,6 +46,15 @@ foreach ($client->parseEvents() as $event){
                         case '🐰':
                               $message['text'] = 'うさ。。';
                               break;
+                        case "おはよう":
+                            ConfirmTemplate confirmTemplate = new ConfirmTemplate(
+                                "おげんきー？",
+                                new MessageAction("おげんき", "🐱✨✨"),
+                                new MessageAction("ねももも", "🐱💤💤")
+                            );
+                            TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
+                            this.reply(replyToken, templateMessage);
+                            break;
                         default:
                               $message['text'] = $message['text'];
                               break;
