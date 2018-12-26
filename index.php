@@ -31,27 +31,27 @@ foreach ($client->parseEvents() as $event){
                     if (preg_match('/🐶🐱/', $message['text'])){
                         $search = array('🐶🐱');
                         $replace = array('🐱🐶');
-                        $message['type'] = 'text'
+                        $message['type'] = 'text';
                         $message['text'] = str_replace($search, $replace, $message['text']);
                     }elseif (preg_match('/🐱🐶/', $message['text'])){
                         $search = array('🐱🐶');
                         $replace = array('🐶🐱');
-                        $message['type'] = 'text'
+                        $message['type'] = 'text';
                         $message['text'] = str_replace($search, $replace, $message['text']);
                     }elseif (preg_match('/🐶/', $message['text'])){
-                        $message['type'] = 'text'
+                        $message['type'] = 'text';
                         $message['text'] = str_replace('🐶', '🐱✨', $message['text']);
                     }elseif (preg_match('/🐱/', $message['text'])){
-                        $message['type'] = 'text'
+                        $message['type'] = 'text';
                         $message['text'] = str_replace('🐱', '🐶✨', $message['text']);
                     }
                     switch ($message['text']){
                         case '🐰':
-                              $message['type'] = 'text'
+                              $message['type'] = 'text';
                               $message['text'] = 'うさ。。';
                               break;
                         default:
-                              $message['type'] = 'text'
+                              $message['type'] = 'text';
                               $message['text'] = $message['text'];
                               break;
                     }
